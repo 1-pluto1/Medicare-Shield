@@ -1,0 +1,46 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Flask示例</title>
+</head>
+   <body>
+
+      <h3>
+         <a href = "{{ url_for('show_all') }}">学生列表 - Flask
+            SQLAlchemy示例</a>
+      </h3>
+
+      <hr/>
+      {%- for message in get_flashed_messages() %}
+         {{ message }}
+      {%- endfor %}
+
+      <h3>学生 (<a href = "{{ url_for('new') }}">添加
+         </a>)</h3>
+
+      <table>
+         <thead>
+            <tr>
+               <th>姓名</th>
+               <th>城市</th>
+               <th>地址</th>
+               <th>Pin</th>
+            </tr>
+         </thead>
+
+         <tbody>
+            {% for student in students %}
+               <tr>
+                  <td>{{ student.name }}</td>
+                  <td>{{ student.city }}</td>
+                  <td>{{ student.addr }}</td>
+                  <td>{{ student.pin }}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+
+   </body>
+</html>
+
+

@@ -1,0 +1,32 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Flask示例</title>
+</head>
+   <body>
+    <h3>学生信息 - Flask SQLAlchemy示例</h3>
+      <hr/>
+
+      {%- for category, message in get_flashed_messages(with_categories = true) %}
+         <div class = "alert alert-danger">
+            {{ message }}
+         </div>
+      {%- endfor %}
+
+      <form action = "{{ request.path }}" method = "post">
+         <label for = "name">姓名</label><br>
+         <input type = "text" name = "name" placeholder = "Name" /><br>
+         <label for = "email">城市</label><br>
+         <input type = "text" name = "city" placeholder = "city" /><br>
+         <label for = "addr">地址</label><br>
+<!--         <textarea name = "addr" placeholder = "addr"/><br>-->
+          <input type = "text" name = "addr" placeholder = "addr" /><br>
+         <label for = "PIN">城市</label><br>
+         <input type = "text" name = "pin" placeholder = "pin" /><br>
+         <input type = "submit" value = "提交" />
+      </form>
+
+   </body>
+</html>
+
+
