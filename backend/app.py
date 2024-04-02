@@ -35,6 +35,7 @@ app.config["SQLALCHEMY_ECHO"] = True
 # 初始化数据库
 db = SQLAlchemy(app)
 
+
 # 跨域请求
 @app.after_request
 def after(resp):
@@ -50,7 +51,8 @@ def after(resp):
     resp.headers['Access-Control-Allow-Headers'] = 'x-requested-with,content-type'
     return resp
 
-#数据库对象
+
+# 数据库对象
 class User(db.Model):  # 表名将会是 user（自动生成，小写处理）
     __tablename__ = 'test'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -68,15 +70,18 @@ class User(db.Model):  # 表名将会是 user（自动生成，小写处理）
         self.Monthly_drug_amount_AVG = Monthly_drug_amount_AVG
         self.Available_account_reimbursement_amount_SUM = Available_account_reimbursement_amount_SUM
 
+
 # 模型加载
 clf = torch.load('./clf.pth')
 xgb = torch.load('./xgb.pth')
 mlp = torch.load('./mlp.pth')
 meta_model = torch.load('./meta_model.pth')
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 # 数据库命令
 @app.cli.command()  # 注册为命令，可以传入 name 参数来自定义命令
@@ -87,6 +92,7 @@ def initdb(drop):
         db.drop_all()
     db.create_all()
     click.echo('Initialized database.')  # 输出提示信息
+
 
 # 上传文件并进行处理，实现主要功能
 @app.route('/', methods=['GET', 'POST'])
@@ -111,9 +117,8 @@ def upload_data():
         data = data[['就诊次数_SUM', '月统筹金额_MAX', 'ALL_SUM', '月药品金额_AVG', '可用账户报销金额_SUM']]
         # db
         db.drop_all()  # 清除数据库里的所有数据
-        db.create_all()  #创建所有表
+        db.create_all()  # 创建所有表
         for index, row in data.iterrows():
-
             new_user = User(row['就诊次数_SUM'],
                             row['月统筹金额_MAX'], row['ALL_SUM'],
                             row['月药品金额_AVG'],
